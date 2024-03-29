@@ -1,0 +1,37 @@
+import sys
+
+from pygame.color import THECOLORS
+
+SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 800
+SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+
+FRAME_RATE = 120
+
+COLOR_BLACK = THECOLORS["black"]
+COLOR_WHITE = THECOLORS["white"]
+
+COLOR_WALL = THECOLORS["black"]
+COLOR_OPEN_NODE = THECOLORS["green"]
+COLOR_CLOSED_NODE = THECOLORS["red"]
+COLOR_START_NODE = THECOLORS["orange"]
+COLOR_END_NODE = THECOLORS["blue"]
+COLOR_PATH_NODE = THECOLORS["magenta"]
+
+NODE_TYPE = {
+    1: ['empty', COLOR_WHITE],
+    2: ['wall', COLOR_WALL],
+    3: ['open', COLOR_OPEN_NODE],
+    4: ['closed', COLOR_CLOSED_NODE],
+    5: ['start_node', COLOR_START_NODE],
+    6: ['end', COLOR_END_NODE],
+    7: ['path', COLOR_BLACK]
+}
+
+NODES_FILE = 'data/obstacle.json'
+
+MAX_SIZE = sys.maxsize
+MIN_SIZE = - sys.maxsize - 1
+
+NODE_STRAIGHT_DISTANCE = 1000000000
+NODE_DIAGONAL_DISTANCE = 1414213562
