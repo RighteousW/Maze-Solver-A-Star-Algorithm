@@ -23,14 +23,14 @@ class Screen:
                     sys.exit()
 
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_q]:
+            if keys[pygame.K_q]:  # new nodes
                 self.board.new_nodes()
                 self.board = Board(screen=self.screen, rows=self.rows, columns=self.columns)
-            if keys[pygame.K_w]:
+            if keys[pygame.K_w]:  # next state of solution
                 self.board.next_state()
-            if keys[pygame.K_s]:
+            if keys[pygame.K_s]:  # completely solve board if possible
                 self.board.solve()
-            if keys[pygame.K_e]:
+            if keys[pygame.K_e]:  # refresh state of maze to unsolved
                 self.board = Board(screen=self.screen, rows=self.rows, columns=self.columns)
 
             # cover all changes with black, to only look at current state
@@ -42,7 +42,7 @@ class Screen:
 
             # update window and sleep program to match frame rate
             pygame.display.update()
-            # self.clock.tick(FRAME_RATE)
+            self.clock.tick(FRAME_RATE)
 
 
 Screen(30, 30).run()

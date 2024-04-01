@@ -21,28 +21,31 @@ def save_to_json(node_dict):
 
 
 def load_from_json():
-    node_dict = {}
-    node_list = []
+    node_dict: dict = dict()
     start_node = None
     end_node = None
 
     with open(NODES_FILE, "r") as f:
-        data = json.loads(f.read())
+        try:
+            data = json.loads(f.read())
+        except json.JSONDecodeError:
+            return False
+        except FileExistsError:
+            f = open(NODES_FILE, 'a')
+            f.close()
 
         for node_entry in data:
             x, y, node_type = node_entry.split(';')
             x = float(x)
             y = float(y)
-            node_type = int(node_type)
 
-            node = Node(node_type, Vector2(x, y))
+            node = Node(node_type, Vector2(x=x, y=y))
 
-            if node_type == 5:
+            if node_type == 'start':
                 start_node = node
-            if node_type == 6:
+            if node_type == 'end':
                 end_node = node
 
             node_dict[x, y] = node
-            node_list.append(node)
 
-    return node_dict, node_list, start_node, end_node
+    return node_dict, start_node, end_node
