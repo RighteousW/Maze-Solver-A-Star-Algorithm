@@ -3,10 +3,12 @@ import random
 import numpy as np
 
 import pygame
-from pygame import Rect
+from pygame import Rect, Vector2
+
+from src.node import Node
 
 from utils.constants import *
-from utils.scripts import *
+from utils.scripts import save_to_json, load_from_json
 
 
 # defines blocks on the screen
@@ -18,8 +20,8 @@ class Board:
         self.columns = columns
 
         self.node_dict: dict[(int, int): Node] = {}  # map each node to its location
-        self.open_nodes: [Node] = list()  # nodes that can be visited
-        self.closed_nodes: [Node] = list()  # nodes that have been visited
+        self.open_nodes: list[Node] = list()  # nodes that can be visited
+        self.closed_nodes: list[Node] = list()  # nodes that have been visited
 
         self.start_node: Node
         self.end_node: Node
@@ -35,6 +37,8 @@ class Board:
         (self.node_dict,
          self.start_node,
          self.end_node) = try_load_json
+        
+        self.start_node.distance_from_start = 0
 
         self.open_nodes.append(self.start_node)
 
@@ -73,7 +77,7 @@ class Board:
         for x in range(self.columns):
             for y in range(self.rows):
                 number = random.randint(0, 1000)
-                if number < 500:
+                if number < 450:
                     type_index = 'wall'
                 else:
                     type_index = 'empty'
@@ -108,6 +112,7 @@ class Board:
 
         neighbors = node.get_neighbors(self.node_dict.values())
 
+        # add neighbors of visited node to list of open nodes
         for neighbor in neighbors:
             if neighbor not in self.closed_nodes:
                 if neighbor.location.x == node.location.x or neighbor.location.y == node.location.y:
@@ -115,7 +120,6 @@ class Board:
                 else:
                     distance = node.distance_from_start + NODE_DIAGONAL_DISTANCE
 
-                neighbor.parent_node = node
                 if neighbor.distance_from_start > distance:
                     neighbor.parent_node = node
                     neighbor.distance_from_start = distance

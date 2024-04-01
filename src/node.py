@@ -16,7 +16,7 @@ class Node:
 
     # returns list containing all neighboring nodes of self node, neighbors can be
     # top-left, top, top-right, middle-left, middle, middle-right, bottom-left, bottom, bottom-right of self node
-    def get_neighbors(self, node_list: []) -> []:
+    def get_neighbors(self, node_list: list) -> list:
         result = []
         for node in node_list:
             if self.is_neighbor(node) and node.type != 'wall':
