@@ -6,7 +6,7 @@ from pygame import Vector2
 from src.node import Node
 from utils.constants import NODES_FILE
 
-
+# saves nodes in a board in json file
 def save_to_json(node_dict):
     data = {}
     for node in node_dict:
@@ -19,7 +19,7 @@ def save_to_json(node_dict):
         with open(NODES_FILE, "x") as write_file:
             json.dump(data, write_file)
 
-
+# loads nodes from json file, returns start, end and dictionary with all nodes
 def load_from_json():
     node_dict: dict = dict()
     start_node = None
