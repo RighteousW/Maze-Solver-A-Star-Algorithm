@@ -42,7 +42,7 @@ class Screen:
 
             # update window and sleep program to match frame rate
             pygame.display.update()
-            self.clock.tick(FRAME_RATE)
+            # self.clock.tick(FRAME_RATE)
 
 
 Screen(30, 30).run()

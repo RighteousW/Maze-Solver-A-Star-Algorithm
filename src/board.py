@@ -47,7 +47,7 @@ class Board:
     # draw lines that make grid blocks look distinct
     def draw_lines(self):
 
-        for x in range(-1, self.columns):
+        for x in range(self.columns):
             pygame.draw.line(self.screen, COLOR_BLACK, (x * self.x_change, 0),
                              (x * self.x_change, SCREEN_HEIGHT))
 
@@ -155,7 +155,7 @@ class Board:
     # completely solve the board if possible
     def solve(self):
         # loop until end node found or no open nodes available
-        while self.end_node not in self.closed_nodes and len(self.open_nodes) > 0:
+        while self.end_node not in self.closed_nodes or len(self.open_nodes) == 0:
             self.next_state()
         if self.end_node in self.closed_nodes:  # if end node has been reached show path from start to end
             self.show_path()
