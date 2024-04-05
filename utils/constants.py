@@ -1,4 +1,5 @@
 import sys
+from math import sqrt
 
 from pygame.color import THECOLORS
 
@@ -35,4 +36,4 @@ MAX_SIZE = sys.maxsize
 # MIN_SIZE = - sys.maxsize - 1
 
 NODE_STRAIGHT_DISTANCE = 1.000000000
-NODE_DIAGONAL_DISTANCE = 1.414213562 * NODE_STRAIGHT_DISTANCE
+NODE_DIAGONAL_DISTANCE = sqrt(2) * NODE_STRAIGHT_DISTANCE
